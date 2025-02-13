@@ -30,19 +30,48 @@ class HashMap {
         else {
           return this.bucket[indexOfBucket][valueIndex];;
         }
+    };
+
+    has(key) {
+          const indexOfBucket = this.hash(key);
+          if(this.bucket[indexOfBucket] === undefined){
+            return false;        
+          }
+          else {
+            return true;
+          }
+      };
+
+
+      remove(key) {
+           const indexOfBucket = this.hash(key);
+          
+           if(this.bucket[indexOfBucket] === undefined){
+            return false;        
+          }
+          else {
+            delete this.bucket[indexOfBucket];
+            return true;
+          }
+
+      };
+
+      
+
     }
 
-
-
     
-};
+
 
 
 // initialize the hashmap 
 
 let newHashMap = new HashMap(0.75,15);
 newHashMap.set("apple","red");
-console.log(newHashMap.get("applee"));
+console.log(newHashMap.get("apple"));
+console.log(newHashMap.has("apple"));
+console.log(newHashMap.remove("applee"));
+
 console.log(newHashMap);
 
 
