@@ -11,7 +11,6 @@ class Hashmap {
     for (let i = 0; i < key.length; i++) {
       hashCode = (primeNumber * hashCode + key.charCodeAt(i)) % this.capacity;
     }
-
     return hashCode;
   }
 
@@ -142,11 +141,14 @@ class Hashmap {
       let isLinkedListIterated = false;
       while (!isLinkedListIterated) {
         if (tempVariable.nextNode === null) {
-          if(tempVariable.data !== undefined && tempVariable.data !== "") {
+          if (tempVariable.data !== undefined && tempVariable.data !== "") {
             elementCount = elementCount + 1;
           }
-           isLinkedListIterated = true;
-        } else if (tempVariable.data !== undefined && tempVariable.data !== "") {
+          isLinkedListIterated = true;
+        } else if (
+          tempVariable.data !== undefined &&
+          tempVariable.data !== ""
+        ) {
           elementCount = elementCount + 1;
         }
 
@@ -163,7 +165,7 @@ class Hashmap {
   keys() {
     const bucket = this.bucket;
     const arrayOfLinkedLists = bucket.filter(
-      (elements) => typeof elements !== undefined
+      (elements) => elements !== undefined
     );
     const arrayOfKey = [];
     arrayOfLinkedLists.forEach((linkedList) => {
@@ -180,7 +182,8 @@ class Hashmap {
         tempVariable = tempVariable.nextNode;
       }
     });
-    return arrayOfKey;
+
+    return arrayOfKey.filter((key) => key !== undefined);
   }
 
   values() {
@@ -203,7 +206,7 @@ class Hashmap {
         tempVariable = tempVariable.nextNode;
       }
     });
-    return arrayOfValues;
+    return arrayOfValues.filter((values) => values !== undefined);
   }
 
   entries() {
@@ -226,7 +229,7 @@ class Hashmap {
         tempVariable = tempVariable.nextNode;
       }
     });
-    return arrayOfKeyValues;
+    return arrayOfKeyValues.filter((keyvalues) => keyvalues[0] !== undefined);
   }
 }
 
@@ -245,30 +248,27 @@ class Node {
 
 // *-------------- initialize app ----------------* //
 
-let test = new Hashmap(0.8, 16);
+let test = new Hashmap(0.75, 16);
 
-// testing
-test.set('apple', 'red')
-test.set('apple', 'redish')
-test.set('banana', 'yellow')
-test.set('carrot', 'orange')
-test.set('carrot', 'orangeish')
-test.set('dog', 'brown')
-test.set('elephant', 'gray')
-test.set('frog', 'green')
-test.set('frog', 'greenish')
-test.set('grape', 'purple')
-test.set('hat', 'black')
-test.set('ice cream', 'white')
-test.set('ice cream', 'whitish')
-test.set('jacket', 'blue')
-test.set('jacket', 'bluish')
-test.set('kite', 'pink')
-test.set('lion', 'golden')
-test.set('moon', 'silver')
-test.set('moon', 'silverish')
+//  ---------------------------testing---------------------------------- //
 
-
+test.set("apple", "red");
+test.set("banana", "yellow");
+test.set("banana", "yellowish");
+test.set("carrot", "orange");
+test.set("dog", "brown");
+test.set("dog", "brownish");
+test.set("elephant", "gray");
+test.set("elephant", "grayish");
+test.set("frog", "green");
+test.set("frog", "greenish");
+test.set("grape", "purple");
+test.set("hat", "black");
+test.set("ice cream", "white");
+test.set("jacket", "blue");
+test.set("kite", "pink");
+test.set("kite", "pinkish");
+test.set("lion", "golden");
+test.set("moon", "silver");
 
 console.log(test);
-  
