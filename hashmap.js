@@ -150,7 +150,88 @@ class Hashmap {
     this.bucket = new Array(capacity);
   };
 
-}
+
+  keys() {
+    
+    const bucket = this.bucket;
+    const arrayOfLinkedLists = bucket.filter((elements) => typeof elements !== undefined);
+    const arrayOfKey = [];
+    arrayOfLinkedLists.forEach(linkedList => {
+      let tempVariable = linkedList.head;
+      let isLinkedListIterated = false;
+      while(!isLinkedListIterated) {
+            if(tempVariable.nextNode === null) {
+              arrayOfKey.push(tempVariable.data[0]);
+              isLinkedListIterated = true;
+            } 
+            else if(tempVariable.data !== undefined) {
+                  arrayOfKey.push(tempVariable.data[0]);
+            }
+
+        tempVariable = tempVariable.nextNode;
+      }
+      
+    });
+    return arrayOfKey;
+  };
+
+
+
+  values() {
+    
+    const bucket = this.bucket;
+    const arrayOfLinkedLists = bucket.filter((elements) => typeof elements !== undefined);
+    const arrayOfValues = [];
+    arrayOfLinkedLists.forEach(linkedList => {
+      let tempVariable = linkedList.head;
+      let isLinkedListIterated = false;
+      while(!isLinkedListIterated) {
+            if(tempVariable.nextNode === null) {
+              arrayOfValues.push(tempVariable.data[1]);
+              isLinkedListIterated = true;
+            } 
+            else if(tempVariable.data !== undefined) {
+                  arrayOfValues.push(tempVariable.data[1]);
+            }
+
+        tempVariable = tempVariable.nextNode;
+      }
+      
+    });
+    return arrayOfValues;
+  };
+
+
+  entries()  {
+    
+    
+      const bucket = this.bucket;
+      const arrayOfLinkedLists = bucket.filter((elements) => typeof elements !== undefined);
+      const arrayOfKeyValues = [];
+      arrayOfLinkedLists.forEach(linkedList => {
+        let tempVariable = linkedList.head;
+        let isLinkedListIterated = false;
+        while(!isLinkedListIterated) {
+              if(tempVariable.nextNode === null) {
+                arrayOfKeyValues.push([tempVariable.data[0],tempVariable.data[1]]);
+                isLinkedListIterated = true;
+              } 
+              else if(tempVariable.data !== undefined) {
+                arrayOfKeyValues.push([tempVariable.data[0],tempVariable.data[1]]);
+              }
+  
+          tempVariable = tempVariable.nextNode;
+        }
+        
+      });
+      return arrayOfKeyValues;
+
+  }
+
+
+
+
+};
 
 class LinkedList {
   constructor(head = null) {
@@ -185,6 +266,10 @@ myHashmap.set('banana', 'yellow')
  myHashmap.set('jacket', 'blue')
  myHashmap.set('kite', 'pink')
  myHashmap.set('lion', 'golden')
+ console.log(myHashmap.keys());
+ console.log(myHashmap.values());
+ console.log(myHashmap.entries());
+ 
 //  myHashmap.clear();
  console.log(myHashmap.length());
 console.log(myHashmap);
