@@ -106,26 +106,47 @@ class Hashmap {
     }
   
     while (isElementFound === false) {
-
       if(tempVariable === undefined) {
         return false;
       }
-
       else if (tempVariable.data[0] === key) {
         tempVariable.data = undefined;
         isElementFound = true;
         return true;
       }
-
-      else if(tempVariable.data[0] !== key && tempVariable.nextNode === null){
+     else if(tempVariable.data[0] !== key && tempVariable.nextNode === null){
         return false;
       }
       tempVariable = tempVariable.nextNode;
     }
-
-
   }
 
+
+  length() {
+    let elementCount = 0;
+    const bucket = this.bucket;
+    const arrayOfLinkedLists = bucket.filter((elements) => typeof elements !== undefined);
+  
+    arrayOfLinkedLists.forEach(linkedList => {
+      let tempVariable = linkedList.head;
+      let isLinkedListIterated = false;
+      while(!isLinkedListIterated) {
+            if(tempVariable.nextNode === null) {
+              elementCount = elementCount + 1;
+              isLinkedListIterated = true;
+            } 
+            else if(tempVariable.data !== undefined) {
+              elementCount = elementCount + 1;
+            }
+
+        tempVariable = tempVariable.nextNode;
+      }
+      
+    });
+    return elementCount;
+  };
+
+  
 
 }
 
@@ -146,9 +167,21 @@ class Node {
 
 let myHashmap = new Hashmap(0.8, 16);
 
-myHashmap.set("xp", "yellow");
-myHashmap.set("xp", "newwwwwwwwwww");
-myHashmap.set("x", "new1");
-myHashmap.set("x", "red");
 
+
+
+myHashmap.set('apple', 'red')
+myHashmap.set("apple","redddd");
+myHashmap.set('banana', 'yellow')
+ myHashmap.set('carrot', 'orange')
+ myHashmap.set('dog', 'brown')
+ myHashmap.set('elephant', 'gray')
+ myHashmap.set('frog', 'green')
+ myHashmap.set('grape', 'purple')
+ myHashmap.set('hat', 'black')
+ myHashmap.set('ice cream', 'white')
+ myHashmap.set('jacket', 'blue')
+ myHashmap.set('kite', 'pink')
+ myHashmap.set('lion', 'golden')
+ console.log(myHashmap.length());
 console.log(myHashmap);
