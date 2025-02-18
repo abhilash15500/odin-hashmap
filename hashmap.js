@@ -96,7 +96,37 @@ class Hashmap {
     }
   };
 
+  remove(key) {
+    const hashedIndex = this.hash(key);
+    let tempVariable;
+    let isElementFound = false;
+
+    if(this.bucket[hashedIndex] !== undefined) {
+      tempVariable = this.bucket[hashedIndex].head;
+    }
   
+    while (isElementFound === false) {
+
+      if(tempVariable === undefined) {
+        return false;
+      }
+
+      else if (tempVariable.data[0] === key) {
+        tempVariable.data = undefined;
+        isElementFound = true;
+        return true;
+      }
+
+      else if(tempVariable.data[0] !== key && tempVariable.nextNode === null){
+        return false;
+      }
+      tempVariable = tempVariable.nextNode;
+    }
+
+
+  }
+
+
 }
 
 class LinkedList {
@@ -115,9 +145,10 @@ class Node {
 // *-------------- initialize app ----------------* //
 
 let myHashmap = new Hashmap(0.8, 16);
-myHashmap.set("x", "red");
+
 myHashmap.set("xp", "yellow");
 myHashmap.set("xp", "newwwwwwwwwww");
 myHashmap.set("x", "new1");
 myHashmap.set("x", "red");
+
 console.log(myHashmap);
