@@ -22,49 +22,62 @@ class Hashmap {
       let node = new Node([key, value]);
       this.bucket[hashedIndex] = linkedList;
       linkedList.head = node;
-    }
-
-    else if (this.bucket[hashedIndex] !== undefined) {
+    } else if (this.bucket[hashedIndex] !== undefined) {
       let tempVariable = this.bucket[hashedIndex].head;
 
       while (tempVariable !== null) {
         if (tempVariable.data.includes(key)) {
           tempVariable.data[1] = value;
           return;
-        }
-        
-        else if (!tempVariable.data.includes(key)) {
-            if (tempVariable.nextNode === null) {
-              tempVariable.nextNode = new Node([key, value]);
-              return;  
+        } else if (!tempVariable.data.includes(key)) {
+          if (tempVariable.nextNode === null) {
+            tempVariable.nextNode = new Node([key, value]);
+            return;
           }
-
         }
         tempVariable = tempVariable.nextNode;
       }
     }
   }
 
-    get(key) {
-      const hashedIndex = this.hash(key);
+  get(key) {
+    const hashedIndex = this.hash(key);
 
-      if(this.bucket[hashedIndex] === undefined) {
-        return null;
-      }
-      let tempVariable = this.bucket[hashedIndex].head;
-      
-      let isElementFound = false;
-      
-      while(isElementFound === false) {
-        
-        if(tempVariable.data[0] === key) {
-          isElementFound = true;
-          return tempVariable.data[1];
-        
-        }
-        tempVariable = tempVariable.nextNode;
-      }
+    if (this.bucket[hashedIndex] === undefined) {
+      return null;
     }
+    let tempVariable = this.bucket[hashedIndex].head;
+
+    let isElementFound = false;
+
+    while (isElementFound === false) {
+      if (tempVariable.data[0] === key) {
+        isElementFound = true;
+        return tempVariable.data[1];
+      }
+      tempVariable = tempVariable.nextNode;
+    }
+  }
+
+
+  has(key) {
+    const hashedIndex = this.hash(key);
+
+    if (this.bucket[hashedIndex] === undefined) {
+      return false;
+    }
+    let tempVariable = this.bucket[hashedIndex].head;
+    let isElementFound = false;
+
+    while (isElementFound === false) {
+      if (tempVariable.data[0] === key) {
+        isElementFound = true;
+        return true;
+      }
+      tempVariable = tempVariable.nextNode;
+    }
+
+  }
 }
 
 class LinkedList {
@@ -85,7 +98,7 @@ class Node {
 let myHashmap = new Hashmap(0.8, 16);
 myHashmap.set("x", "red");
 myHashmap.set("xp", "yellow");
-myHashmap.set("xp","newwwwwwwwwww");
-myHashmap.set("x","new1");
-myHashmap.set("x","red");
+myHashmap.set("xp", "newwwwwwwwwww");
+myHashmap.set("x", "new1");
+myHashmap.set("x", "red");
 console.log(myHashmap);
