@@ -146,7 +146,9 @@ class Hashmap {
     return elementCount;
   };
 
-  
+  clear(capacity = this.capacity) {
+    this.bucket = new Array(capacity);
+  };
 
 }
 
@@ -183,5 +185,6 @@ myHashmap.set('banana', 'yellow')
  myHashmap.set('jacket', 'blue')
  myHashmap.set('kite', 'pink')
  myHashmap.set('lion', 'golden')
+//  myHashmap.clear();
  console.log(myHashmap.length());
 console.log(myHashmap);
