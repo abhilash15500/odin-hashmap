@@ -42,42 +42,61 @@ class Hashmap {
 
   get(key) {
     const hashedIndex = this.hash(key);
-
-    if (this.bucket[hashedIndex] === undefined) {
-      return null;
-    }
-    let tempVariable = this.bucket[hashedIndex].head;
-
+    let tempVariable;
     let isElementFound = false;
 
+    if(this.bucket[hashedIndex] !== undefined) {
+      tempVariable = this.bucket[hashedIndex].head;
+    }
+  
     while (isElementFound === false) {
-      if (tempVariable.data[0] === key) {
+
+      if(tempVariable === undefined) {
+        return null;
+      }
+
+      else if (tempVariable.data[0] === key) {
         isElementFound = true;
         return tempVariable.data[1];
       }
-      tempVariable = tempVariable.nextNode;
-    }
-  }
 
-
-  has(key) {
-    const hashedIndex = this.hash(key);
-
-    if (this.bucket[hashedIndex] === undefined) {
-      return false;
-    }
-    let tempVariable = this.bucket[hashedIndex].head;
-    let isElementFound = false;
-
-    while (isElementFound === false) {
-      if (tempVariable.data[0] === key) {
-        isElementFound = true;
-        return true;
+      else if(tempVariable.data[0] !== key && tempVariable.nextNode === null){
+        return null;
       }
       tempVariable = tempVariable.nextNode;
     }
+  };
 
-  }
+
+  
+  has(key) {
+    const hashedIndex = this.hash(key);
+    let tempVariable;
+    let isElementFound = false;
+
+    if(this.bucket[hashedIndex] !== undefined) {
+      tempVariable = this.bucket[hashedIndex].head;
+    }
+  
+    while (isElementFound === false) {
+
+      if(tempVariable === undefined) {
+        return false;
+      }
+
+      else if (tempVariable.data[0] === key) {
+        isElementFound = true;
+        return true;
+      }
+
+      else if(tempVariable.data[0] !== key && tempVariable.nextNode === null){
+        return false;
+      }
+      tempVariable = tempVariable.nextNode;
+    }
+  };
+
+  
 }
 
 class LinkedList {
