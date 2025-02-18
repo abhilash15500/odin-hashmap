@@ -44,6 +44,27 @@ class Hashmap {
       }
     }
   }
+
+    get(key) {
+      const hashedIndex = this.hash(key);
+
+      if(this.bucket[hashedIndex] === undefined) {
+        return null;
+      }
+      let tempVariable = this.bucket[hashedIndex].head;
+      
+      let isElementFound = false;
+      
+      while(isElementFound === false) {
+        
+        if(tempVariable.data[0] === key) {
+          isElementFound = true;
+          return tempVariable.data[1];
+        
+        }
+        tempVariable = tempVariable.nextNode;
+      }
+    }
 }
 
 class LinkedList {
