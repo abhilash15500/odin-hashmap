@@ -117,7 +117,7 @@ class Hashmap {
       if (tempVariable === undefined) {
         return false;
       } else if (tempVariable.data[0] === key) {
-        tempVariable.data = undefined;
+        tempVariable.data = "";
         isElementFound = true;
         return true;
       } else if (
@@ -142,11 +142,11 @@ class Hashmap {
       let isLinkedListIterated = false;
       while (!isLinkedListIterated) {
         if (tempVariable.nextNode === null) {
-          if(tempVariable.data !== undefined) {
+          if(tempVariable.data !== undefined && tempVariable.data !== "") {
             elementCount = elementCount + 1;
           }
            isLinkedListIterated = true;
-        } else if (tempVariable.data !== undefined) {
+        } else if (tempVariable.data !== undefined && tempVariable.data !== "") {
           elementCount = elementCount + 1;
         }
 
